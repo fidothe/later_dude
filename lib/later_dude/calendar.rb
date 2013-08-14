@@ -155,7 +155,7 @@ module LaterDude
     end
 
     def day_names
-      @day_names ||= @options[:use_full_day_names] ? full_day_names : abbreviated_day_names
+      @day_names ||= @options[:day_names] || (@options[:use_full_day_names] ? full_day_names : abbreviated_day_names)
     end
 
     def full_day_names
@@ -179,7 +179,7 @@ module LaterDude
     def include_day_abbreviation(day)
       return day if @options[:use_full_day_names]
 
-      content_tag(:abbr, day, :title => full_day_names[abbreviated_day_names.index(day)])
+      content_tag(:abbr, day, :title => full_day_names[day_names.index(day)])
     end
 
     def apply_first_day_of_week(day_names)
